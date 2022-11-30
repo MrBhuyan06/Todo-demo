@@ -30,7 +30,7 @@ exports.register= async(req,res)=>
         })
         if(userExist)
         {
-            return res.json(statusCode.UNPROCESSABLE_ENTITY,"User or Email Already exists")
+            return res.status(statusCode.UNPROCESSABLE_ENTITY).json("User or Email Already exists")
         }
            // save  to Db
 
@@ -49,7 +49,7 @@ exports.register= async(req,res)=>
                 expiresIn: "2h",
               })
 
-            res.json(jsonGenerate(statusCode.SUCCESS,"Registration successfull",{userId:user._id,token:token}))
+           return  res.status(statusCode.SUCCESS).json(jsonGenerate("successfully created",{userId:user._id,token:token}))
 
 
            } catch (error) {
@@ -57,6 +57,6 @@ exports.register= async(req,res)=>
            }
     }
 
-    res.json(jsonGenerate(statusCode.VALIDATION_ERROR, "Validation error", errors.mapped()))
+        return res.status(statusCode.VALIDATION_ERROR).json(jsonGenerate( "Validation error", errors.mapped()))
 
 }

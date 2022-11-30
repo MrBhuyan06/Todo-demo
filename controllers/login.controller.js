@@ -32,10 +32,10 @@ const login =async (req,res)=>
            expiresIn:'2h'
         })
         
-       res.json(jsonGenerate(statusCode.SUCCESS,"login is successful",{userId:userExist._id,token:token}))
+       return res.json(jsonGenerate(statusCode.SUCCESS,"login is successful",{userId:userExist._id,token:token}))
 
    }
-   res.json(jsonGenerate(statusCode.VALIDATION_ERROR, "Validation error", errors.mapped()))
+    return res.json(jsonGenerate(statusCode.VALIDATION_ERROR, "Validation error", errors.mapped()))
 }
 
 module.exports=login

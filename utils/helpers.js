@@ -1,7 +1,7 @@
-exports.jsonGenerate=(statusCode,message,data) =>
+exports.jsonGenerate=(message,data=null) =>
 {
     return { 
-              status:statusCode,
+              
               message:message, 
               data:data
             }

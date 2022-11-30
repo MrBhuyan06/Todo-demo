@@ -6,7 +6,7 @@ exports.auth=async (req,res,next) =>
 {
     if(req.headers['auth'] === undefined)
     {
-        return res.json(jsonGenerate(statusCode.AUTH_ERROR,"ACESSS DENIEND"))
+        return res.status(statusCode.AUTH_ERROR).json(jsonGenerate("ACESSS DENIEND"))
     }
 
     const token = req.headers['auth'];
@@ -14,11 +14,14 @@ exports.auth=async (req,res,next) =>
         
         const {MYSECRET_KEY}=process.env
         const decode= await JWT.verify(token, MYSECRET_KEY)
-        req.userId=decode.userId
-        req.username=decode.username;
+        console.log(decode);
+        req.userId=decode.id
+        console.log(req.userId);
+        req.username=decode.user;
+        console.log(req.username);
         return next();
 
     } catch (error) {
-        return res.json(jsonGenerate(statusCode.UNPROCESSABLE_ENTITY,"invalid token"))
+        return res.status(statusCode.AUTH_ERROR).json(jsonGenerate("invalid token"))
     }
 }

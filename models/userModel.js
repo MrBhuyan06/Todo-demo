@@ -30,6 +30,12 @@ const userSchema=mongoose.Schema({
         max:32,
         require:true
     },
+    todos:
+    [{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"todo",
+        require:true
+    }],
     date:
     {
         type:Date,
